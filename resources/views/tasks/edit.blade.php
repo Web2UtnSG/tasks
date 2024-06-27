@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <h1>Editando tarea ID: {{ $task->id }}</h1>
 <hr>
 @if ($errors->any())
@@ -13,18 +15,19 @@
     @csrf
     @method('PUT')
     <div>
-        <label for="name">Nombre</label>
-        <input type="text" name="name" id="name" value="{{ $task->name }}">
+        <label class="form-label" for="name">Nombre</label>
+        <input class="form-control" type="text" name="name" id="name" value="{{ $task->name }}">
         @error('name')
             <p>{{ $message }}</p>
         @enderror
     </div>
     <div>
-        <label for="description">Descripción</label>
-        <textarea name="description" id="description" cols="30" rows="10">{{ $task->description }}</textarea>
+        <label class="form-label" for="description">Descripción</label>
+        <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ $task->description }}</textarea>
         @error('description')
             <p>{{ $message }}</p>
         @enderror
     </div>
-    <button type="submit">Actualizar</button>
+    <button type="submit" class="btn btn-primary">Actualizar</button>
 </form>
+@endsection

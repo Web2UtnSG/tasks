@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Priority;
 use App\Models\Task;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,9 @@ class TaskController extends Controller
     public function create()
     {
 
-        return view('tasks.create');
+        return view('tasks.create',[
+            'priorities' => Priority::all()
+        ]);
     }
 
     public function show(Task $task)
@@ -42,7 +45,8 @@ class TaskController extends Controller
         // $task->save();
         $data = request()->validate([
             'name' => ['required', 'min:3', 'max:255'],
-            'description' => ['required', 'min:3']
+            'description' => ['required', 'min:3'],
+            'priority_id' => 'required|exists:priorities,id'
         ]);
 
         Task::create($data);
